@@ -2,6 +2,8 @@ import { Server } from "https://deno.land/x/socket_io@0.2.1/mod.ts";
 
 const io = new Server();
 
+const port = 3000;
+
 console.log(`Socket.IO server listening on port ${port}`);
 
 io.on("connection", (socket) => {
