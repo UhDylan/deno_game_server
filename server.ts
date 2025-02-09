@@ -18,6 +18,11 @@ io.on("connection", (socket) => {
     console.log("Server broadcasted modelAdded:", message);
   });
 
+  socket.on("deleteModel", (modelName) => {
+    console.log(`Client ${socket.id} deleting model: ${modelName}`);
+    io.emit("modelDeleted", modelName);
+  });
+
   socket.on("disconnect", () => {
     console.log("Client disconnected:", socket.id);
   });
