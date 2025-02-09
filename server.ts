@@ -18,7 +18,7 @@ io.on("connection", (socket) => {
     console.log("Server broadcasted modelAdded:", message);
   });
 
-  socket.on("deleteModel", (modelName) => {
+  socket.on("modelDeleted", (modelName) => {
     console.log(`Client ${socket.id} deleting model: ${modelName}`);
     io.emit("modelDeleted", modelName);
   });
