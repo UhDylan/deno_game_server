@@ -10,6 +10,11 @@ io.on("connection", (socket) => {
   socket.on("disconnect", (reason) => {
     console.log(`socket ${socket.id} disconnected due to ${reason}`);
   });
+
+  socket.on("modelUpdate", (message) => {
+    console.log("message:" + message);
+    io.emit("modelUpdate", message);
+  });
 });
 
 Deno.serve({
