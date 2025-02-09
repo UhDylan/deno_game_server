@@ -12,15 +12,17 @@ io.on("connection", (socket) => {
   socket.on("modelAdded", (message) => {
     console.log("Server received modelAdded:", message);
 
-    // Access io.of("/").sockets *inside* the modelAdded handler:
     logConnectedClients(io); // Call the helper function
     io.emit("modelAdded", message);
     console.log("Server broadcasted modelAdded:", message);
   });
 
-  socket.on("modelDeleted", (modelName) => {
-    console.log(`Client ${socket.id} deleting model: ${modelName}`);
-    io.emit("modelDeleted", modelName);
+  socket.on("modelDelete", (message) => {
+    console.log("Server received modelDelete:", message);
+
+    logConnectedClients(io); // Call the helper function
+    io.emit("modelDelete", message);
+    console.log("Server broadcasted modelDelete:", message);
   });
 
   socket.on("disconnect", () => {
