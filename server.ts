@@ -15,6 +15,12 @@ io.on("connection", (socket) => {
     console.log("message:" + message);
     io.emit("modelUpdate", message);
   });
+
+  socket.on("modelAdded", (message) => {
+    console.log("Server received modelAdded:", message); // Log when received
+    io.emit("modelAdded", message); // Broadcast to all clients
+    console.log("Server broadcasted modelAdded:", message); // Log when broadcasted
+  });
 });
 
 Deno.serve({
