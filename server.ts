@@ -17,11 +17,11 @@ io.on("connection", (socket) => {
     console.log("Server broadcasted modelAdded:", message);
   });
 
-  socket.on("modelDelete", (message) => {
+  socket.on("modelDeleted", (message) => {
     console.log("Server received modelDelete:", message);
 
     logConnectedClients(io); // Call the helper function
-    io.emit("modelDelete", message);
+    io.emit("modelDeleted", message);
     console.log("Server broadcasted modelDelete:", message);
   });
 
