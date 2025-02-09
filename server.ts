@@ -12,8 +12,8 @@ io.on("connection", (socket) => {
   socket.on("modelAdded", (message) => {
     console.log("Server received modelAdded:", message);
 
-    // Access io.sockets.sockets HERE, after a connection:
-    console.log("Connected clients:", Array.from(io.sockets.sockets.keys()));
+    // Access io.of("/").sockets *inside* the modelAdded handler:
+    logConnectedClients(io); // Call the helper function
     io.emit("modelAdded", message);
     console.log("Server broadcasted modelAdded:", message);
   });
@@ -22,6 +22,20 @@ io.on("connection", (socket) => {
     console.log("Client disconnected:", socket.id);
   });
 });
+
+function logConnectedClients(io: Server) {
+  if (io.of("/").sockets) {
+    // Check if sockets exist
+    console.log("Connected clients:", Array.from(io.of("/").sockets.keys()));
+  } else {
+    console.log("No clients connected yet."); // Log if no clients connected
+  }
+}
+
+console.log(
+  "Initial connected clients (likely empty):",
+  Array.from(io.of("/").sockets.keys()),
+);
 
 Deno.serve({
   handler: io.handler(),
