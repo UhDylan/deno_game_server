@@ -12,15 +12,10 @@ io.on("connection", (socket) => {
   socket.on("modelAdded", (message) => {
     console.log("Server received modelAdded:", message);
 
-    // Access io.sockets.sockets safely after the connection is established
-    if (io.sockets) {
-      // Check if io.sockets exists
-      console.log("Connected clients:", Array.from(io.sockets.sockets.keys()));
-      io.emit("modelAdded", message); // Use io.emit to broadcast to all clients
-      console.log("Server broadcasted modelAdded:", message);
-    } else {
-      console.error("io.sockets is undefined. Cannot log connected clients.");
-    }
+    // Access io.sockets.sockets HERE, after a connection:
+    console.log("Connected clients:", Array.from(io.sockets.sockets.keys()));
+    io.emit("modelAdded", message);
+    console.log("Server broadcasted modelAdded:", message);
   });
 
   socket.on("disconnect", () => {
